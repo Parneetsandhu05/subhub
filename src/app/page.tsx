@@ -1,35 +1,42 @@
+'use client';
 import StatCard from '@/components/StatCard';
 import Link from 'next/link';
+
+import { useState } from 'react';
+import AddSubscriptionModal from '@/components/AddSubscriptionModal';
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
-      {/* High-Fi Header */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-          <div className="flex items-center gap-10">
-            <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              SubHub
-            </span>
-            <div className="hidden md:flex gap-8 text-sm font-semibold text-slate-500">
-              <button className="text-blue-600 border-b-2 border-blue-600 py-5">Overview</button>
-              <Link href="/subscriptions" className="hover:text-slate-800 py-5 transition">
-                Subscriptions
-              </Link>
-              <Link href="/analytics" className="hover:text-slate-800 py-5 transition">
-                Analytics
-              </Link>
+  <>
+      <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
+        {/* Navigation Header */}
+        <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+          <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div className="flex items-center gap-10">
+              <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                SubHub
+              </span>
+              <div className="hidden md:flex gap-8 text-sm font-semibold text-slate-500">
+                <button className="text-blue-600 border-b-2 border-blue-600 py-5">Overview</button>
+                <Link href="/subscriptions" className="hover:text-slate-800 py-5 transition">Subscriptions</Link>
+                <Link href="/analytics" className="hover:text-slate-800 py-5 transition">Analytics</Link>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+                PS
+              </div>
+              {/* 5. Update this button to open the modal */}
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="bg-slate-900 text-white px-5 py-2 rounded-full text-xs font-bold hover:shadow-lg transition-all active:scale-95"
+              >
+                + Add Subscription
+              </button>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-400 to-indigo-500 flex items-center justify-center text-white text-xs font-bold shadow-sm">
-              PS
-            </div>
-            <button className="bg-slate-900 text-white px-5 py-2 rounded-full text-xs font-bold hover:shadow-lg transition-all active:scale-95">
-              + Add Subscription
-            </button>
-          </div>
-        </div>
-      </nav>
+        </nav>
 
       <main className="max-w-7xl mx-auto px-6 py-10">
         <header className="mb-10">
@@ -132,5 +139,10 @@ export default function Home() {
         </div>
       </main>
     </div>
+    <AddSubscriptionModal 
+      isOpen={isModalOpen} 
+      onClose={() => setIsModalOpen(false)} 
+    />
+  </>
   );
 }
