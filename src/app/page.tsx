@@ -1,5 +1,5 @@
 import StatCard from '@/components/StatCard';
-
+import Link from 'next/link';
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
@@ -70,29 +70,36 @@ export default function Home() {
               <h3 className="text-xl font-bold">Upcoming Renewals</h3>
               <span className="text-blue-600 text-xs font-bold cursor-pointer hover:underline">See Calendar</span>
             </div>
-            <div className="space-y-4">
-              {[
-                { name: 'Netflix', price: '$19.99', date: 'In 2 days', icon: '🍿', color: 'bg-red-50' },
-                { name: 'Spotify', price: '$10.99', date: 'In 5 days', icon: '🎵', color: 'bg-green-50' },
-                { name: 'Adobe CC', price: '$54.99', date: 'May 1st', icon: '🎨', color: 'bg-orange-50' },
-              ].map((sub) => (
-                <div key={sub.name} className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-2xl transition group cursor-default">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 ${sub.color} rounded-2xl flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition`}>
-                      {sub.icon}
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-800">{sub.name}</p>
-                      <p className="text-xs text-slate-400 font-medium">{sub.date}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-bold text-slate-900">{sub.price}</p>
-                    <p className="text-[10px] text-slate-400 font-bold uppercase">Monthly</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="space-y-4">
+  {[
+    { name: 'Netflix', price: '$19.99', date: 'In 2 days', icon: '🍿', color: 'bg-red-50' },
+    { name: 'Spotify', price: '$10.99', date: 'In 5 days', icon: '🎵', color: 'bg-green-50' },
+    { name: 'Adobe CC', price: '$54.99', date: 'May 1st', icon: '🎨', color: 'bg-orange-50' },
+  ].map((sub) => (
+    /* This Link tag makes the whole row clickable */
+    <Link 
+      href={`/subscriptions/${sub.name.toLowerCase().replace(' ', '-')}`} 
+      key={sub.name}
+      className="block outline-none"
+    >
+      <div className="flex items-center justify-between p-4 hover:bg-slate-50 rounded-2xl transition group cursor-pointer border border-transparent hover:border-slate-100">
+        <div className="flex items-center gap-4">
+          <div className={`w-12 h-12 ${sub.color} rounded-2xl flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition`}>
+            {sub.icon}
+          </div>
+          <div>
+            <p className="font-bold text-slate-800">{sub.name}</p>
+            <p className="text-xs text-slate-400 font-medium">{sub.date}</p>
+          </div>
+        </div>
+        <div className="text-right">
+          <p className="font-bold text-slate-900">{sub.price}</p>
+          <p className="text-[10px] text-slate-400 font-bold uppercase">Monthly</p>
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>  
           </div>
 
           {/* Analytics Visualizer */}
