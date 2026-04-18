@@ -15,7 +15,9 @@ export default function Home() {
               <Link href="/subscriptions" className="hover:text-slate-800 py-5 transition">
                 Subscriptions
               </Link>
-              <button className="hover:text-slate-800 py-5 transition">Analytics</button>
+              <Link href="/analytics" className="hover:text-slate-800 py-5 transition">
+                Analytics
+              </Link>
             </div>
           </div>
           <div className="flex items-center gap-4">
