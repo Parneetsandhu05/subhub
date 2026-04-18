@@ -12,7 +12,9 @@ export default function Home() {
             </span>
             <div className="hidden md:flex gap-8 text-sm font-semibold text-slate-500">
               <button className="text-blue-600 border-b-2 border-blue-600 py-5">Overview</button>
-              <button className="hover:text-slate-800 py-5 transition">Subscriptions</button>
+              <Link href="/subscriptions" className="hover:text-slate-800 py-5 transition">
+                Subscriptions
+              </Link>
               <button className="hover:text-slate-800 py-5 transition">Analytics</button>
             </div>
           </div>
