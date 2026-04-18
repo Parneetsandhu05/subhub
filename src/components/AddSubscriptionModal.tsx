@@ -11,7 +11,7 @@ interface ModalProps {
 export default function AddSubscriptionModal({ isOpen, onClose, onAdd }: ModalProps) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-
+  const [billingDate, setBillingDate] = useState('');
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -21,7 +21,7 @@ export default function AddSubscriptionModal({ isOpen, onClose, onAdd }: ModalPr
     const newEntry = {
       name: name,
       price: `$${price}`,
-      date: 'Just added',
+      date: billingDate ? `Next: ${billingDate}` : 'No date set',
       icon: '🛡️', 
       color: 'bg-blue-50'
     };
@@ -32,6 +32,7 @@ export default function AddSubscriptionModal({ isOpen, onClose, onAdd }: ModalPr
     // Clear the form
     setName('');
     setPrice('');
+    setBillingDate('');
   };
 
   return (
@@ -65,6 +66,15 @@ export default function AddSubscriptionModal({ isOpen, onClose, onAdd }: ModalPr
               placeholder="0.00" 
               className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-slate-900 placeholder:text-slate-400" 
             />
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-400 uppercase mb-2">Billing Date</label>
+            <input 
+              type="date" 
+              value={billingDate}
+              onChange={(e) => setBillingDate(e.target.value)}
+              className="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-slate-900 focus:ring-2 focus:ring-blue-500 outline-none transition" 
+              />
           </div>
 
           <button type="submit" className="w-full bg-blue-600 text-white py-4 rounded-2xl font-black shadow-lg shadow-blue-200 hover:bg-blue-700 transition active:scale-95">

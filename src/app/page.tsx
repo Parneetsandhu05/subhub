@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AddSubscriptionModal from '@/components/AddSubscriptionModal';
 
@@ -12,6 +12,18 @@ export default function Home() {
     { name: 'Spotify', price: '$10.99', date: 'In 5 days', icon: '🎵', color: 'bg-green-50' },
     { name: 'Adobe CC', price: '$54.99', date: 'May 1st', icon: '🎨', color: 'bg-orange-50' },
   ]);
+  // 1. Load data from localStorage on startup
+  useEffect(() => {
+    const savedData = localStorage.getItem('subhub_storage');
+    if (savedData) {
+      setSubscriptions(JSON.parse(savedData));
+    }
+  }, []);
+
+  // 2. Save data to localStorage whenever the list changes
+  useEffect(() => {
+    localStorage.setItem('subhub_storage', JSON.stringify(subscriptions));
+  }, [subscriptions]);
 
   // 2. Logic to add a new subscription to the list
   const addSubscription = (newSub: any) => {
